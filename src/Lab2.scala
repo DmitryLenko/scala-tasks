@@ -12,16 +12,34 @@ object Lab2 {
     l.foldRight(None: Option[A])((h, _) => Some(h))
   }
 
+  def headOption2[A](l: List[A]): Option[A] = {
+    if (l.isEmpty) sys.error("list is empty")
+    else l.foldRight(None: Option[A])((h, _) => Some(h))
+  }
+
   /**
     *
     * @param l list
     * @tparam A
     * @return tail of the list
     */
-  def tailOption[A](l: List[A]): List[A] = {
+  def tailOption[A](l: List[A]): Option[List[A]] = {
     l match {
-      case head :: tail => tail
-      case _ => List()
+      case head :: tail => Some(tail)
+      case _ => None
+    }
+  }
+
+  /**
+    *
+    * @param l list
+    * @tparam A
+    * @return tail of the list
+    */
+  def tailOption2[A](l: List[A]): Option[List[A]] = {
+    l match {
+      case head :: tail => Some(tail)
+      case _ => sys.error("list is empty")
     }
   }
 
